@@ -1,0 +1,150 @@
+<head>
+	<script type="text/javascript">
+		window.addEventListener("message",function(event) {
+			var body = document.getElementsByTagName("body")[0]
+			// Buttons
+			var btns = event.data.btns
+			var div = document.getElementById("teams")
+			div.innerHTML = ""
+			Object.keys(event.data.btns).forEach(function(k){
+				var el = div.appendChild(document.createElement("button"))
+				var text = btns[k].text
+				el.innerText = text
+				el.style.background = "rgba("+btns[k].col+")"
+				el.onclick = function() {
+					var r = new XMLHttpRequest()
+					r.open("POST", "http://minigame/team", true)
+					r.send(JSON.stringify({
+						button: text
+					}))
+					body.classList.remove("visible")
+				}
+			})
+			// Info
+			var info = event.data.info
+			document.getElementById("gmname").innerText = info.name
+			document.getElementById("gmauthors").innerText = info.authors
+			document.getElementById("desc").innerText = info.desc
+			body.classList.add("visible")
+		}, false)
+	</script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
+	<style>
+		body {
+			margin:0;
+			height:100vh;
+			flex-direction:column;
+			font-family: Roboto;
+			display: flex;
+			color:white;
+			background: transparent;
+			/*background: url(http://media.rockstargames.com/rockstargames/img/global/news/upload/gtav_details09122014_006.jpg) center no-repeat;*/
+			overflow: hidden;
+		}
+		.visible #bottom, .visible #title span {
+			transform: translate(0,0);
+		}
+		/* Title */
+		#title {
+			text-shadow: 0 10px 20px rgba(0,0,0,0.38), 0 6px 6px rgba(0,0,0,0.46);
+			position: relative;
+			flex-grow: 1;
+			font-weight: bold;
+			text-indent: 16px;
+		}
+		#title span {
+			position: absolute;
+			bottom: 0;
+			left: 16px;
+			font-size: 7.5vw;
+			/* Hide */
+			transform: translate(calc(-100% - 16px),0);
+			transition: transform .5s ease-out;
+		}
+		/* Bottom */
+		#bottom {
+			display: flex;
+			text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			background:rgba(0,0,0,.75);
+			padding:32px;
+			justify-content: space-between;
+			/* Hide */
+			transform: translate(0,100%);
+			transition: transform .5s ease-out;
+		}
+		#bottom > div {
+			width: 30%;
+		}
+		#teams {
+			align-self: center;
+			display: flex;
+			flex-wrap:wrap;
+		}
+		#teams button {
+			flex-grow:1;
+			margin:0 8px 8px 0;
+			height:2.25vw;
+			width:10vw;
+			padding: 0;
+			border:0;
+			outline: none;
+			/* Text */
+			font-size: 1.5vw;
+			color:white;
+			text-shadow: 0 1px 3px rgba(0,0,0,0.24), 0 1px 2px rgba(0,0,0,0.48);
+			font-family: Roboto;
+			transition: padding .25s;
+		}
+		#teams button:hover {
+			padding-left: .25vw;
+		}
+		.name {
+			font-size: 2.5vw;
+			font-weight: bold;
+		}
+		.authors {
+			font-size: 1.25vw;
+			font-weight: bold;
+			opacity: .75;
+		}
+		#desc {
+			font-size: 1.25vw;
+		}
+		img {
+			width: 40%;
+			margin:auto;
+		}
+		#mapinfo {
+			display: flex;
+			align-items: center;
+			text-align: center;
+		}
+	</style>
+</head>
+<body class="flex">
+	<div id="title"><span>Choose Team</span></div>
+	<div id="bottom">
+		<div id="teams">
+			<button class="teambtn" style="background:rgb(55, 212, 100);">Human</button>
+			<button class="teambtn" style="background:rgb(255, 95, 74);">Barrel</button>
+			<button class="teambtn">Spectator</button>
+		</div>
+		<div>
+			<span id="gmname" class="name">Suicide Barrels</span>
+			by
+			<span id="gmauthors" class="authors">Kng</span>
+			<div id="desc">
+				A old GMod Fretta gamemode ported to GTA.<br>
+				As a human you try to survive, and as a barrel<br>
+				you kill humans. Dead humans turn into barrels<br>
+			</div>
+		</div>
+		<div id="mapinfo">
+			<div>
+				<span class="name">Map Name</span><br>
+				<span class="authors">Kng</span>
+			</div>
+			<img src="http://media.moddb.com/images/mods/1/15/14831/suicide_killingrooms0000.jpg">
+		</div>
+	</div>
+</body>
