@@ -2,20 +2,19 @@ resource_manifest_version "77731fab-63ca-442c-a67b-abc70f28dfa5"
 
 client_script "@minigame/sh_lib.lua"
 server_script "@minigame/sh_lib.lua"
-client_script "sh.lua"
 server_script "sh.lua"
-client_script "cl.lua"
+client_script "sh.lua"
 
 file "hud.html"
 
 dependency "minigame"
 
 resource_type "gametype" {
-	name = "Suicide Barrels",
 	ismg = true, -- Used to identify minigames
+	name = "Sumo",
 	teams = {
-		{name = "Humans", col = {55, 212, 100}},
-		{name = "Barrels", col = {255, 95, 74 }, class = "barrel", internal = true}
+		{name = "Red",  col = {255, 95, 74}},
+		{name = "Blue", col = {74, 95, 255}}
 	},
 	scores = {
 		Wins     = {"%d"     ,{0}  },
@@ -25,9 +24,9 @@ resource_type "gametype" {
 	},
 	authors = {"Kng"},
 	desc = {
-		"A old GMod Fretta gamemode ported to GTA.",
-		"As a human you try to survive and as a barrel",
-		"you kill humans. Dead humans turn into barrels"
+		"Drive your car into other peoples cars so",
+		"they fly off rooftops n stuff.",
+		"Apparently there's teams as well."
 	},
 	hud = "hud.html"
 }

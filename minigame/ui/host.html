@@ -1,0 +1,37 @@
+<head>
+	<script src="parser.js"></script>
+	<script src="craziness.js"></script>
+	<script>
+		let updHud
+		window.addEventListener("message",function(event) {
+			let data = event.data
+			if (data.type === "updHud" && updHud) {
+				/*if (data.prop === "mg:state") { // H A C K S
+					let hud = document.getElementById("hud")
+					hud.style.display =
+						data.value === "ingame" ? "block" : "none"
+					let hud = document.getElementById("hud")
+				}*/
+				updHud(data.prop, data.value)
+			} else if (data.type === "loadHud") {
+				let hud = document.getElementById("hud")
+				hud.innerHTML = data.content
+				updHud = instantiateTemplates(hud)
+			}
+		})
+	</script>
+	<style>
+		#hud {
+			position: fixed;
+			top:0;
+			left:0;
+			bottom:0;
+			right:0;
+			overflow:none;
+			z-index: -1;
+		}
+	</style>
+</head>
+<body>
+	<div id="hud"></div>
+</body>

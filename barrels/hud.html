@@ -1,0 +1,31 @@
+<style>
+	.center {
+		position: absolute;
+		left:50%;
+		transform: translate(-50%, 0);
+	}
+	#state {
+		top:10px;
+		font-family: "Arial";
+		font-size: 32px;
+		color:#eee;
+		text-shadow: 1px 1px black;
+	}
+	#timebar {
+		top:50px;
+		width:100px;
+		height:8px;
+		border-radius: 4px;
+		background:rgba(50,50,50,.5);
+	}
+	#timebar div {
+		height:8px;
+		background:#fff;
+		border-radius: 4px;
+	}
+</style>
+
+<span id="state" class="center">{state String}</span>
+<div id="timebar" class="center">
+	<div style="width:calc(100% * {mg:RoundTimer Percentage});"></div>
+</div>

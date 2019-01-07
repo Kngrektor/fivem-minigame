@@ -1,0 +1,3 @@
+function CLASS:OnSpawn()
+
+end
